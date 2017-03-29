@@ -39,6 +39,7 @@ namespace MvcTemplate.Tests.Unit.Components.Extensions
                 Number = 1.6666M
             };
         }
+        // ReSharper disable once UnusedParameter.Local
         private BootstrapModel(Boolean noInit)
         {
         }

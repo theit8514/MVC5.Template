@@ -19,6 +19,7 @@ namespace MvcTemplate.Tests.Unit.Components.Mvc
             ModelMetadata metadata = new DataAnnotationsModelMetadataProvider()
                 .GetMetadataForProperty(null, typeof(AdaptersModel), "Range");
 
+            // ReSharper disable once ObjectCreationAsStatement
             new RangeAdapter(metadata, new ControllerContext(), attribute);
 
             String actual = attribute.ErrorMessage;

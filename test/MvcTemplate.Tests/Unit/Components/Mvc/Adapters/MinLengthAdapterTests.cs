@@ -19,6 +19,7 @@ namespace MvcTemplate.Tests.Unit.Components.Mvc
             ModelMetadata metadata = new DataAnnotationsModelMetadataProvider()
                 .GetMetadataForProperty(null, typeof(AdaptersModel), "MinLength");
 
+            // ReSharper disable once ObjectCreationAsStatement
             new MinLengthAdapter(metadata, new ControllerContext(), attribute);
 
             String expected = Validations.MinLength;

@@ -19,6 +19,7 @@ namespace MvcTemplate.Tests.Unit.Components.Mvc
                 .GetMetadataForProperty(null, typeof(AdaptersModel), "StringLength");
             StringLengthAttribute attribute = new StringLengthAttribute(128);
 
+            // ReSharper disable once ObjectCreationAsStatement
             new StringLengthAdapter(metadata, new ControllerContext(), attribute);
 
             String expected = Validations.StringLength;
@@ -34,6 +35,7 @@ namespace MvcTemplate.Tests.Unit.Components.Mvc
             ModelMetadata metadata = new DataAnnotationsModelMetadataProvider()
                 .GetMetadataForProperty(null, typeof(AdaptersModel), "StringLength");
 
+            // ReSharper disable once ObjectCreationAsStatement
             new StringLengthAdapter(metadata, new ControllerContext(), attribute);
 
             String expected = Validations.StringLengthRange;

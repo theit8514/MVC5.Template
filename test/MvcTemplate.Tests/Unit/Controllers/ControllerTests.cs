@@ -13,6 +13,7 @@ namespace MvcTemplate.Tests.Unit.Controllers
     {
         protected void ReturnCurrentAccountId(BaseController controller, Int32 id)
         {
+            // ReSharper disable once UnusedVariable
             controller.When(sub => { Int32 get = sub.CurrentAccountId; }).DoNotCallBase();
             controller.CurrentAccountId.Returns(id);
         }

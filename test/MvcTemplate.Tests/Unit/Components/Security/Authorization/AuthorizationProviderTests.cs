@@ -304,7 +304,7 @@ namespace MvcTemplate.Tests.Unit.Components.Security
         [Fact]
         public void IsAuthorizedFor_DoesNotAuthorizeNotExistingAccount()
         {
-            Account account = CreateAccountWithPermissionFor("Area", "Authorized", "Action");
+            CreateAccountWithPermissionFor("Area", "Authorized", "Action");
 
             Assert.False(authorization.IsAuthorizedFor(0, "Area", "Authorized", "Action"));
         }
@@ -320,7 +320,7 @@ namespace MvcTemplate.Tests.Unit.Components.Security
         [Fact]
         public void IsAuthorizedFor_DoesNotAuthorizeNullAccount()
         {
-            Account account = CreateAccountWithPermissionFor(null, "Authorized", "Action");
+            CreateAccountWithPermissionFor(null, "Authorized", "Action");
 
             Assert.False(authorization.IsAuthorizedFor(null, null, "Authorized", "Action"));
         }

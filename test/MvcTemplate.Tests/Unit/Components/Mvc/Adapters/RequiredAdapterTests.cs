@@ -19,6 +19,7 @@ namespace MvcTemplate.Tests.Unit.Components.Mvc
                 .GetMetadataForProperty(null, typeof(AdaptersModel), "Required");
             RequiredAttribute attribute = new RequiredAttribute();
 
+            // ReSharper disable once ObjectCreationAsStatement
             new RequiredAdapter(metadata, new ControllerContext(), attribute);
 
             String expected = Validations.Required;
