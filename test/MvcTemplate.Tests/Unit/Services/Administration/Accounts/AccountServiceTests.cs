@@ -68,21 +68,22 @@ namespace MvcTemplate.Tests.Unit.Services
         [Fact]
         public void GetViews_ReturnsAccountViews()
         {
-            IEnumerator<AccountView> actual = service.GetViews().GetEnumerator();
-            IEnumerator<AccountView> expected = context
+            using (IEnumerator<AccountView> actual = service.GetViews().GetEnumerator())
+            using (IEnumerator<AccountView> expected = context
                 .Set<Account>()
                 .ProjectTo<AccountView>()
                 .OrderByDescending(view => view.Id)
-                .GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+                .GetEnumerator())
             {
-                Assert.Equal(expected.Current.CreationDate, actual.Current.CreationDate);
-                Assert.Equal(expected.Current.RoleTitle, actual.Current.RoleTitle);
-                Assert.Equal(expected.Current.IsLocked, actual.Current.IsLocked);
-                Assert.Equal(expected.Current.Username, actual.Current.Username);
-                Assert.Equal(expected.Current.Email, actual.Current.Email);
-                Assert.Equal(expected.Current.Id, actual.Current.Id);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(expected.Current.CreationDate, actual.Current.CreationDate);
+                    Assert.Equal(expected.Current.RoleTitle, actual.Current.RoleTitle);
+                    Assert.Equal(expected.Current.IsLocked, actual.Current.IsLocked);
+                    Assert.Equal(expected.Current.Username, actual.Current.Username);
+                    Assert.Equal(expected.Current.Email, actual.Current.Email);
+                    Assert.Equal(expected.Current.Id, actual.Current.Id);
+                }
             }
         }
 

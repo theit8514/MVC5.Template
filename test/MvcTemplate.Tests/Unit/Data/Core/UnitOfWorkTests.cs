@@ -119,13 +119,14 @@ namespace MvcTemplate.Tests.Unit.Data.Core
             IEnumerable<TestModel> models = new[] { ObjectFactory.CreateTestModel(1), ObjectFactory.CreateTestModel(2) };
             unitOfWork.InsertRange(models);
 
-            IEnumerator<TestModel> actual = context.ChangeTracker.Entries<TestModel>().Select(entry => entry.Entity).GetEnumerator();
-            IEnumerator<TestModel> expected = models.GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+            using (IEnumerator<TestModel> actual = context.ChangeTracker.Entries<TestModel>().Select(entry => entry.Entity).GetEnumerator())
+            using (IEnumerator<TestModel> expected = models.GetEnumerator())
             {
-                Assert.Equal(EntityState.Added, context.Entry(actual.Current).State);
-                Assert.Same(expected.Current, actual.Current);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(EntityState.Added, context.Entry(actual.Current).State);
+                    Assert.Same(expected.Current, actual.Current);
+                }
             }
         }
 

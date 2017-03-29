@@ -47,14 +47,15 @@ namespace MvcTemplate.Tests.Unit.Services
 
             service.SeedPermissions(view);
 
-            IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.GetEnumerator();
-            IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+            using (IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.GetEnumerator())
+            using (IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.GetEnumerator())
             {
-                Assert.Equal(expected.Current.Id, actual.Current.Id);
-                Assert.Equal(expected.Current.Title, actual.Current.Title);
-                Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(expected.Current.Id, actual.Current.Id);
+                    Assert.Equal(expected.Current.Title, actual.Current.Title);
+                    Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                }
             }
         }
 
@@ -65,14 +66,15 @@ namespace MvcTemplate.Tests.Unit.Services
 
             service.SeedPermissions(view);
 
-            IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.SelectMany(node => node.Nodes).GetEnumerator();
-            IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.SelectMany(node => node.Nodes).GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+            using (IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.SelectMany(node => node.Nodes).GetEnumerator())
+            using (IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.SelectMany(node => node.Nodes).GetEnumerator())
             {
-                Assert.Equal(expected.Current.Id, actual.Current.Id);
-                Assert.Equal(expected.Current.Title, actual.Current.Title);
-                Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(expected.Current.Id, actual.Current.Id);
+                    Assert.Equal(expected.Current.Title, actual.Current.Title);
+                    Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                }
             }
         }
 
@@ -83,14 +85,15 @@ namespace MvcTemplate.Tests.Unit.Services
 
             service.SeedPermissions(view);
 
-            IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.SelectMany(node => node.Nodes).SelectMany(node => node.Nodes).GetEnumerator();
-            IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.SelectMany(node => node.Nodes).SelectMany(node => node.Nodes).GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+            using (IEnumerator<JsTreeNode> expected = CreatePermissions().Nodes.SelectMany(node => node.Nodes).SelectMany(node => node.Nodes).GetEnumerator())
+            using (IEnumerator<JsTreeNode> actual = view.Permissions.Nodes.SelectMany(node => node.Nodes).SelectMany(node => node.Nodes).GetEnumerator())
             {
-                Assert.Equal(expected.Current.Id, actual.Current.Id);
-                Assert.Equal(expected.Current.Title, actual.Current.Title);
-                Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(expected.Current.Id, actual.Current.Id);
+                    Assert.Equal(expected.Current.Title, actual.Current.Title);
+                    Assert.Equal(expected.Current.Nodes.Count, actual.Current.Nodes.Count);
+                }
             }
         }
 
@@ -127,19 +130,20 @@ namespace MvcTemplate.Tests.Unit.Services
         [Fact]
         public void GetViews_ReturnsRoleViews()
         {
-            IEnumerator<RoleView> actual = service.GetViews().GetEnumerator();
-            IEnumerator<RoleView> expected = context
+            using (IEnumerator<RoleView> actual = service.GetViews().GetEnumerator())
+            using (IEnumerator<RoleView> expected = context
                 .Set<Role>()
                 .ProjectTo<RoleView>()
                 .OrderByDescending(view => view.Id)
-                .GetEnumerator();
-
-            while (expected.MoveNext() | actual.MoveNext())
+                .GetEnumerator())
             {
-                Assert.Equal(expected.Current.Permissions.SelectedIds, actual.Current.Permissions.SelectedIds);
-                Assert.Equal(expected.Current.CreationDate, actual.Current.CreationDate);
-                Assert.Equal(expected.Current.Title, actual.Current.Title);
-                Assert.Equal(expected.Current.Id, actual.Current.Id);
+                while (expected.MoveNext() | actual.MoveNext())
+                {
+                    Assert.Equal(expected.Current.Permissions.SelectedIds, actual.Current.Permissions.SelectedIds);
+                    Assert.Equal(expected.Current.CreationDate, actual.Current.CreationDate);
+                    Assert.Equal(expected.Current.Title, actual.Current.Title);
+                    Assert.Equal(expected.Current.Id, actual.Current.Id);
+                }
             }
         }
 
