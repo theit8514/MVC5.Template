@@ -4,7 +4,7 @@ using NSubstitute;
 using System;
 using Xunit;
 
-namespace MvcTemplate.Tests.Unit.Services
+namespace MvcTemplate.Tests.Unit.Validators
 {
     public class BaseValidatorTests : IDisposable
     {

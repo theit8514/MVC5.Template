@@ -7,7 +7,8 @@ namespace MvcTemplate.Tests.Unit.Components.Extensions
     {
         [Required]
         public String Required { get; set; }
-        public virtual String NotRequired { get; set; }
+
+        public virtual String NotRequired { get; set; } = "NotRequired";
 
         public Decimal Number { get; set; }
         public DateTime? Date { get; set; }
@@ -22,7 +23,6 @@ namespace MvcTemplate.Tests.Unit.Components.Extensions
 
         public BootstrapModel()
         {
-            NotRequired = "NotRequired";
             Required = "Required";
             EditableFalse = 1.4M;
             EditableTrue = 5.5M;
